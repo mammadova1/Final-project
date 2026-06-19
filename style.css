@@ -1,0 +1,1310 @@
+/* 1. Qlobal Tənzimləmələr və Dəyişənlər */
+:root {
+    --primary-color: #161c2d;
+    --accent-color: #f26522; /* Figmadakı narıncı */
+    --text-muted: #696f7c;
+    --bg-color: #eefbf7;
+    /* Ekran böyüdükcə kənar boşluqlar bura əsasən nizamlanır */
+    --container-padding: 4%; 
+    --max-width: 1200px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--primary-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+/* 2. Figma Grid/Container Sistemi (Əsas Hissə) */
+.container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto; /* Səhifəni ortalayır və kənarlarda boşluq yaradır */
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
+}
+
+/* 3. Header / Navbar */
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    position: sticky;
+    top: 0;
+    background-color: transperent;
+    z-index: 1000;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    cursor: pointer;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 35px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--primary-color);
+    font-size: 15px;
+    font-weight: 700;
+    transition: color 0.2s ease;
+}
+
+.nav-links a.active, .nav-links a:hover {
+    color: var(--accent-color);
+}
+
+.nav-auth {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.nav-auth a {
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* Navbar is over dark section - white text */
+.site-header.dark-bg {
+    background-color: transparent;
+}
+
+.site-header.dark-bg .logo,
+.site-header.dark-bg .nav-links a,
+.site-header.dark-bg .nav-auth a {
+    color: #ffffff;
+}
+
+.site-header.dark-bg .nav-links a.active,
+.site-header.dark-bg .nav-links a:hover {
+    color: var(--accent-color);
+}
+
+/* 4. Hero Bölməsinin Quruluşu */
+.hero-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.hero-wrapper {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Sol Tərəf - Mətn Blokunun Figma Ölçüləri */
+.hero-left {
+    flex: 0 0 50%; /* Tam olaraq ekranın yarısını tutur */
+    max-width: 540px;
+    padding-right: 20px;
+}
+
+.hero-left h1 {
+    font-size: clamp(36px, 4.5vw, 64px); /* Ekran ölçüsünə görə dinamik böyüyən font */
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -1.5px;
+    margin-bottom: 24px;
+}
+
+.hero-left p {
+    font-size: clamp(16px, 1.5vw, 19px);
+    line-height: 1.65;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+/* Sağ Tərəf - Şəkil və Fon Effektləri */
+.hero-right {
+    flex: 0 0 50%;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    align-self: stretch; /* Şəkil sahəsinin hündürlüyünü tam artırır */
+}
+
+.model-img {
+    max-height: 75vh;
+    width: auto;
+    object-fit: contain;
+    z-index: 2;
+    display: block;
+}
+
+/* Arxa fondakı abstrakt dalğalı xətlər üçün yer */
+.bg-waves {
+    position: absolute;
+    bottom: 0;
+    right: -10%;
+    width: 120%;
+    height: 100%;
+    background: radial-gradient(circle at 70% 80%, rgba(255,255,255,0.5) 0%, transparent 60%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* 5. Tam Responsivlik (Media Queries) */
+@media (max-width: 1024px) {
+    :root {
+        --container-padding: 6%; /* Planşetlərdə kənar boşluq bir az artır */
+    }
+    
+    .hero-wrapper {
+        flex-direction: column;
+        text-align: center;
+        gap: 50px;
+        padding-top: 40px;
+    }
+
+    .hero-left {
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding-right: 0;
+    }
+
+    .hero-right {
+        flex: 0 0 100%;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .model-img {
+        max-height: 50vh;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links, .nav-auth {
+        display: none; /* Mobil versiyada menyunu gizlətmək üçün (istəyə görə hamburger edilə bilər) */
+    }
+}
+
+/* ==========================================
+   5. Brands Section (Şirkətlər Bölməsi)
+   ========================================== */
+
+.brands-section {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Həm mətni, həm loqoları mərkəzləyir */
+    text-align: center;
+}
+
+/* Başlıq və Paraqraf Tənzimləmələri */
+.brands-header {
+    max-width: 750px; /* Mətnin şəkildəki kimi sətirlərə bölünməsi üçün ideal genişlik */
+    margin-bottom: 60px;
+}
+
+.brands-header h2 {
+    font-size: clamp(28px, 3.5vw, 40px); /* Ekran ölçüsünə görə dinamik böyüyən başlıq */
+    font-weight: 800;
+    color: var(--primary-color);
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+}
+
+.brands-header p {
+    font-size: clamp(15px, 1.3vw, 17px);
+    line-height: 1.75;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+/* Loqo Grid Sistemi */
+.brands-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Əsasən 4 sütun (1-ci sətir üçün) */
+    gap: 40px 60px; /* Sətirlər arası 40px, sütunlar arası 60px məsafə */
+    width: 100%;
+    max-width: 900px; /* Loqoların həddindən artıq yayılmaması üçün */
+    justify-items: center;
+    align-items: center;
+}
+
+/* 2-ci sətirdəki son 2 loqonu Figma-dakı kimi mərkəzə gətirmək üçün hiylə */
+.brands-grid .brand-item:nth-child(5) {
+    grid-column: 2; /* 5-ci loqunu 2-ci sütundan başladır */
+}
+
+.brands-grid .brand-item:nth-child(6) {
+    grid-column: 3; /* 6-cı loqunu 3-cü sütuna qoyur */
+}
+
+/* Loqoların vizual nizamlanması */
+.brand-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.brand-item img {
+    max-width: 140px; /* Loqoların ölçülərini balansda saxlamaq üçün */
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(1); /* Loqoları vahid boz/qara rəng tonuna gətirmək üçün (istəyə görə silinə bilər) */
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.brand-item img:hover {
+    filter: grayscale(0);
+    opacity: 1;
+}
+
+/* ==========================================
+   Brands Responsivlik (Media Queries)
+   ========================================== */
+
+@media (max-width: 768px) {
+    .brands-section {
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+
+    /* Mobil və planşetdə loqoları sadə 2 və ya 3 sütunlu gridə keçiririk */
+    .brands-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+    }
+
+    /* Mobildə xüsusi sütun nizamlamasını sıfırlayırıq ki, normal düzülsünlər */
+    .brands-grid .brand-item:nth-child(5),
+    .brands-grid .brand-item:nth-child(6) {
+        grid-column: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .brands-grid {
+        grid-template-columns: repeat(2, 1fr); /* Kiçik ekranlarda 2-2 düzülüş */
+        gap: 30px;
+    }
+    
+    .brand-item img {
+        max-width: 110px; /* Mobildə loqolar bir az kiçilsin */
+    }
+}
+
+/* ==========================================
+   6. Jobs By Category Section (Tünd Fonlu)
+   ========================================== */
+
+.categories-section {
+    background-color: #161c2d; /* Şəkildəki tünd göyümtül/qara premium fon */
+    padding-top: 120px;
+    padding-bottom: 120px;
+    width: 100%;
+}
+
+/* Başlıq sahəsi (Sola hizalanmış) */
+.categories-header {
+    max-width: 450px; /* Başlığın və alt mətnin iki sətirə qırılması üçün */
+    margin-bottom: 60px;
+}
+
+.categories-header h2 {
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 800;
+    color: #ffffff; /* Tünd fonda ağ başlıq */
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+}
+
+.categories-header p {
+    font-size: 17px;
+    line-height: 1.6;
+    color: #9096a2; /* Kontrast yaratmaq üçün soft boz rəng */
+    font-weight: 400;
+}
+
+/* 3 Sütunlu Kart Grid-i */
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Ekranda yan-yana 3 kart */
+    gap: 30px; /* Kartlar arasındakı bərabər məsafə */
+    width: 100%;
+}
+
+/* Ümumi Kart Strukturu */
+.category-card {
+    background-color: #ffffff;
+    border-radius: 10px; /* Figma-dakı incə kənar yumruluğu */
+    padding: 40px 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 140px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.category-card h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #161c2d;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+}
+
+.category-card span {
+    font-size: 15px;
+    color: #696f7c;
+    font-weight: 500;
+}
+
+/* Aktiv Kartın Xüsusi Stil Tənzimləmələri (Design Kartı) */
+.category-card.active {
+    background-color: #4c3aff; /* Şəkildəki tam parlaq bənövşəyi/göy rəng */
+    box-shadow: 0 15px 30px rgba(76, 58, 255, 0.25);
+}
+
+.category-card.active h3 {
+    color: #ffffff;
+}
+
+.category-card.active span {
+    color: rgba(255, 255, 255, 0.7); /* Ağ mətnin bir az şəffaf variantı */
+}
+
+/* Standart kartlara hover edildikdə olan animasiya */
+.category-card:not(.active):hover {
+    transform: translateY(-5px); /* Kartın yüngülcə yuxarı qalxması */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    background-color: #f8f9fa;
+}
+
+/* ==========================================
+   Categories Responsivlik (Media Queries)
+   ========================================== */
+
+@media (max-width: 1024px) {
+    .categories-grid {
+        grid-template-columns: repeat(2, 1fr); /* Planşetlərdə 2 sütun */
+        gap: 25px;
+    }
+    .categories-section {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+}
+
+@media (max-width: 640px) {
+    .categories-header {
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .categories-grid {
+        grid-template-columns: 1fr; /* Mobil telefonlarda alt-alta 1 sütun */
+        gap: 20px;
+    }
+    
+    .category-card {
+        padding: 30px 25px;
+        min-height: 120px;
+    }
+}
+
+/* ==========================================
+   7. Steps Section (3 Addım Bölməsi)
+   ========================================== */
+
+.steps-section {
+    padding-top: 120px;
+    padding-bottom: 120px;
+    background-color: #ffffff; /* Ağ fon */
+}
+
+/* Başlıq Bloku */
+.steps-header {
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto 80px auto;
+}
+
+.steps-header h2 {
+    font-size: clamp(30px, 3.8vw, 40px);
+    font-weight: 800;
+    color: var(--primary-color);
+    letter-spacing: -1px;
+    margin-bottom: 20px;
+}
+
+.steps-header p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text-muted);
+}
+
+/* Əsas İçlik Layout-u */
+.steps-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 80px;
+}
+
+/* Sol Tərəf - Media/Şəkil Konstruksiyası */
+.steps-media {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.image-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 400px; /* Şəklin Figma ölçüsü */
+}
+
+/* Arxa fondakı soft yaşıl kvadrat detal */
+.green-bg-decor {
+    position: absolute;
+    bottom: -30px;
+    right: -30px;
+    width: 100%;
+    height: 90%;
+    background-color: #eefbf7;
+    border-radius: 12px;
+    z-index: 1;
+}
+
+.main-step-img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+/* Şəklin üzərinə oturan bildiriş qutusu (New Invitation) */
+.invitation-badge {
+    position: absolute;
+    bottom: 40px;
+    left: -50px; /* Şəkildən kənara çıxması üçün */
+    background-color: #161c2d; /* Tünd göy/qara fon */
+    padding: 16px 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-width: 280px;
+    z-index: 3;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+}
+
+.badge-icon {
+    width: 38px;
+    height: 38px;
+    background-color: #68D585; /* Soft yaşıl dairə */
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Yaşıl zəng nöqtəsinin CSS simulyasiyası */
+.bell-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #68deac;
+    border-radius: 50%;
+}
+
+.badge-text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.badge-title {
+    color: #9096a2;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.badge-desc {
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* Sağ Tərəf - Addımlar siyahısı */
+.steps-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 45px; /* Addımlar arası şaquli məsafə */
+}
+
+.step-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+}
+
+/* Göy rəngli rəqəm dairələri */
+.step-number {
+    width: 36px;
+    height: 36px;
+    background-color: #4c3aff; /* Figmadakı bənövşəyi/göy rəng */
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 700;
+    flex-shrink: 0; /* Ekran kiçiləndə dairənin sıxılmaması üçün */
+}
+
+.step-info h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.step-info p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+/* ==========================================
+   Steps Responsivlik (Media Queries)
+   ========================================== */
+
+@media (max-width: 1024px) {
+    .steps-content {
+        gap: 50px;
+    }
+    .invitation-badge {
+        left: -20px; /* Orta ölçülü ekranlarda kənarı tənzimləyir */
+    }
+}
+
+@media (max-width: 850px) {
+    .steps-content {
+        flex-direction: column; /* Şəkil və mətni alt-alta düzür */
+        gap: 80px;
+    }
+    
+    .steps-media, .steps-list {
+        width: 100%;
+    }
+    
+    .steps-list {
+        max-width: 550px;
+        margin: 0 auto;
+    }
+
+    .invitation-badge {
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: -20px; /* Mobildə şəklin tam altına və mərkəzinə gəlir */
+    }
+}
+
+/* ==========================================
+   8. Featured Jobs Section (Vakansiyalar)
+   ========================================== */
+
+.featured-section {
+    padding-top: 100px;
+    padding-bottom: 120px;
+    background-color: #ffffff;
+}
+
+/* Üst Hissə Layout-u (Başlıq vs Oxlar) */
+.featured-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 50px;
+}
+
+.header-text {
+    max-width: 450px;
+}
+
+.header-text h2 {
+    font-size: clamp(30px, 3.8vw, 40px);
+    font-weight: 800;
+    color: var(--primary-color);
+    letter-spacing: -1px;
+    margin-bottom: 16px;
+}
+
+.header-text p {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text-muted);
+}
+
+/* Naviqasiya Ox Düymələri */
+.slider-controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 5px;
+}
+
+.control-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background-color: #f4f5f7; /* Soft boz fon */
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.control-btn:hover {
+    background-color: var(--primary-color);
+    color: #ffffff;
+}
+
+/* Kartların Konteyneri - Geniş ekranlarda normal paylanır, mobildə scroll olur */
+.jobs-list-wrapper {
+    display: flex;
+    gap: 25px;
+    width: 100%;
+    overflow-x: visible; /* Böyük ekranda kəsilməsin */
+}
+
+/* Vakansiya Kartı Strukturu */
+.job-card {
+    flex: 1; /* Hər karta bərabər yer ayırır */
+    min-width: 260px; /* Mobildə kartın sıxılmaması üçün minimum en */
+    background: #ffffff;
+    border: 1px solid #eceef2; /* İncə kənar xətti */
+    border-radius: 12px;
+    padding: 30px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: all 0.3s ease;
+}
+
+.job-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(22, 28, 45, 0.06);
+    border-color: transparent;
+}
+
+/* İş Növü Teqləri (Tags) */
+.job-tag {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+}
+
+.job-tag.full-time { color: #00c572; } /* Yaşıl */
+.job-tag.remote { color: #4c3aff; }    /* Bənövşəyi */
+.job-tag.part-time { color: #ff5252; } /* Qırmızı */
+
+/* Kart Başlığı və Məkan */
+.job-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1.3;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+}
+
+.job-location {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin-bottom: 35px;
+}
+
+/* Şirkət Məlumatı (Alt Hissə) */
+.job-company {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: auto; /* Şirkəti həmişə kartın ən aşağısına itələyir */
+}
+
+.company-logo {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    color: #ffffff;
+}
+
+/* Hər şirkətin öz loqo rəngi */
+.logo-dorfus { background-color: #3b82f6; }
+.logo-coworks { background-color: #f97316; }
+.logo-askimat { background-color: #6366f1; }
+.logo-greener { background-color: #22c55e; }
+
+.company-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+/* ==========================================
+   Featured Jobs Responsivlik (Media Queries)
+   ========================================== */
+
+@media (max-width: 1024px) {
+    /* Planşet və noutbuklarda horizontal sürüşmə aktivləşir, kartlar sınmır */
+    .featured-section {
+        overflow-hidden: clip; /* Səhifənin özünün sağa daşmaması üçün */
+    }
+    
+    .jobs-list-wrapper {
+        overflow-x: auto; /* Sürüşdürmə paneli aktivləşir */
+        padding-bottom: 20px; /* Scrollbar ilə məsafə */
+        scroll-snap-type: x mandatory; /* Kart-kart dayanma effekti */
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .job-card {
+        flex: 0 0 280px; /* Kartların enini sabit saxlayır ki, scroll olsun */
+        scroll-snap-align: start;
+    }
+}
+
+@media (max-width: 640px) {
+    .featured-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+    
+    .slider-controls {
+        align-self: flex-end; /* Mobildə düymələr sağa keçsin */
+    }
+}
+
+/* ==========================================
+   9. News Section (Blog / Xəbərlər Bölməsi)
+   ========================================== */
+
+.news-section {
+    background-color: #f4f7fa; /* Şəkildəki xüsusi soft boz/mavi fon */
+    padding-top: 100px;
+    padding-bottom: 120px;
+    width: 100%;
+}
+
+/* Başlıq sahəsi (Mərkəzlənmiş) */
+.news-header {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 60px auto;
+}
+
+.news-header h2 {
+    font-size: clamp(30px, 3.8vw, 40px);
+    font-weight: 800;
+    color: var(--primary-color);
+    letter-spacing: -1px;
+    margin-bottom: 18px;
+}
+
+.news-header p {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text-muted);
+}
+
+/* 3 Sütunlu Yan-yana Grid */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px; /* Kartlar arasındakı bərabər boşluq */
+    width: 100%;
+}
+
+/* Kartın Ümumi Strukturu */
+.news-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden; /* Şəklin kəpənəklərinin kənara daşmaması üçün */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02); /* Çox yüngül premium kölgə */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.news-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 40px rgba(22, 28, 45, 0.08);
+}
+
+/* Kart Şəkil Sahəsi */
+.card-image-wrapper {
+    width: 100%;
+    height: 240px; /* Şəkillərin eyni hündürlükdə qalması üçün */
+    overflow: hidden;
+}
+
+.card-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Şəkli əzilmədən sahəyə tam otuzdurur */
+    transition: transform 0.5s ease;
+}
+
+.news-card:hover .card-image-wrapper img {
+    transform: scale(1.05); /* Üzərinə gəldikdə yüngül zoom effekti */
+}
+
+/* Kartın Daxili Mətn Sahəsi */
+.card-content {
+    padding: 30px 28px 40px 28px; /* Figma ölçülərinə uyğun daxili boşluqlar */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Başlıqlar fərqli ölçüdə olsa belə kart boylarını bərabərləşdirir */
+}
+
+/* Kateqoriya Teqi (Career / Lifestyle) */
+.card-tag {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 500;
+    margin-bottom: 16px;
+    display: inline-block;
+}
+
+/* Blog Başlığı */
+.card-title {
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1.4;
+    letter-spacing: -0.5px;
+}
+
+/* ==========================================
+   News Responsivlik (Media Queries)
+   ========================================== */
+
+@media (max-width: 1024px) {
+    .news-grid {
+        grid-template-columns: repeat(2, 1fr); /* Planşetlərdə 2 sütun */
+        gap: 25px;
+    }
+}
+
+@media (max-width: 768px) {
+    .news-section {
+        padding-top: 70px;
+        padding-bottom: 80px;
+    }
+    
+    .news-grid {
+        grid-template-columns: 1fr; /* Mobil telefonlarda tək sütun */
+        max-width: 450px; /* Kartın mobildə çox enli görünməməsi üçün */
+        margin: 0 auto;
+    }
+    
+    .card-image-wrapper {
+        height: 210px; /* Mobildə şəkil nisbəti bir az kiçilir */
+    }
+}
+
+/* ==========================================
+   10. Newsletter Section (Abunəlik Bölməsi)
+   ========================================== */
+
+.newsletter-section {
+    padding-top: 100px;
+    padding-bottom: 120px;
+    background-color: #ffffff; /* Ağ fon */
+    display: flex;
+    justify-content: center;
+}
+
+.newsletter-wrapper {
+    max-width: 550px; /* Kontentin çox yayılmaması üçün mərkəzi genişlik */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Yaşıl Dairəvi İkon Qutusu */
+.mail-icon-circle {
+    width: 64px;
+    height: 64px;
+    background-color: #54d48a; /* Şəkildəki tam parlaq yaşıl rəng */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 35px;
+    box-shadow: 0 10px 20px rgba(84, 212, 138, 0.2);
+}
+
+.newsletter-wrapper h2 {
+    font-size: clamp(28px, 3.5vw, 36px);
+    font-weight: 800;
+    color: var(--primary-color);
+    letter-spacing: -1px;
+    margin-bottom: 18px;
+}
+
+.newsletter-desc {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+}
+
+/* Müasir İnteqrasiya Olunmuş Form Sahəsi */
+.subscribe-form {
+    display: flex;
+    width: 100%;
+    background-color: #ffffff;
+    border: 1px solid #eceef2; /* İncə kənar xətti */
+    border-radius: 10px; /* Figma yumruluğu */
+    padding: 8px; /* Düymə və kənar arasında incə boşluq */
+    box-shadow: 0 15px 35px rgba(22, 28, 45, 0.04); /* Soft premium kölgə */
+    margin-bottom: 24px;
+    transition: border-color 0.3s ease;
+}
+
+/* Input fokusa gəldikdə kənar xəttinin rənglənməsi */
+.subscribe-form:focus-within {
+    border-color: #4c3aff;
+}
+
+.email-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding-left: 16px;
+    font-size: 16px;
+    color: var(--primary-color);
+    width: 100%;
+}
+
+/* İnputun placeholder (köməkçi) mətn rəndi */
+.email-input::placeholder {
+    color: #9096a2;
+}
+
+/* Parlaq Bənövşəyi Sifariş Düyməsi */
+.subscribe-btn {
+    background-color: #4c3aff; /* Səhifənin əsas accent bənövşəyi rəngi */
+    color: #ffffff;
+    border: none;
+    outline: none;
+    padding: 14px 28px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    white-space: nowrap; /* Mətnin iki sətirə düşməməsi üçün */
+}
+
+.subscribe-btn:hover {
+    background-color: #3b2ecc;
+}
+
+.subscribe-btn:active {
+    transform: scale(0.98);
+}
+
+/* Gizlilik və Qaydalar Mətni (Alt Hissə) */
+.privacy-note {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #9096a2;
+}
+
+.privacy-note a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.privacy-note a:hover {
+    color: #4c3aff;
+    text-decoration: underline;
+}
+
+/* ==========================================
+   Newsletter Responsivlik (Media Queries)
+   ========================================== */
+
+@media (max-width: 580px) {
+    .newsletter-section {
+        padding-top: 60px;
+        padding-bottom: 70px;
+    }
+
+    /* Mobildə input və düymə alt-alta düşür */
+    .subscribe-form {
+        flex-direction: column;
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        gap: 12px;
+    }
+
+    .email-input {
+        background-color: #ffffff;
+        border: 1px solid #eceef2;
+        padding: 16px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+    }
+
+    .subscribe-btn {
+        padding: 16px;
+        width: 100%; /* Düymə tam eni tutur */
+    }
+}
+
+/* ==========================================
+   11. Main Footer Section (Saytın Sonu)
+   ========================================== */
+
+.site-footer {
+    background-color: #161c2d; /* Şəkildəki premium tünd qara/göy fon */
+    padding-top: 80px;
+    padding-bottom: 80px;
+    width: 100%;
+}
+
+/* Footer üçün xüsusi Grid Sistemi */
+.footer-grid {
+    display: grid;
+    /* Sol sütun mətndir deyə 2 pay, digər 4 menyu sütunu hərəsi 1 pay yer tutur */
+    grid-template-columns: 2.5fr repeat(4, 1fr); 
+    gap: 40px;
+}
+
+/* Brend Hissəsi (Sol Tərəf) */
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-right: 40px;
+}
+
+.footer-logo {
+    font-size: 24px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+    margin-bottom: 24px;
+}
+
+.footer-brand p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: #9096a2; /* Soft boz kontrast rəng */
+    margin-bottom: 30px;
+    max-width: 320px;
+}
+
+/* Sosial Şəbəkə Linkləri */
+.social-links {
+    display: flex;
+    gap: 16px;
+}
+
+.social-icon {
+    color: #9096a2;
+    transition: color 0.2s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-icon:hover {
+    color: #68deac; /* Loqoların üstünə gəldikdə saytın yaşıl rəng çalığı ilə canlanır */
+    transform: translateY(-2px);
+}
+
+/* Sağ Menyu Sütunları */
+.footer-links-column h3 {
+    font-size: 14px;
+    font-weight: 500;
+    color: #9096a2; /* Kateqoriya adları üst sönük başlıqla */
+    text-transform: capitalize;
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+}
+
+.footer-links-column ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px; /* Linklərin arasındakı şaquli məsafə */
+}
+
+.footer-links-column ul a {
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 400;
+    color: #ffffff; /* Ağ təmiz linklər */
+    transition: color 0.2s ease;
+    display: inline-block;
+}
+
+.footer-links-column ul a:hover {
+    color: #4c3aff; /* Üzərinə gəldikdə bənövşəyi rəngə keçid */
+    padding-left: 2px; /* İncə sağa sürüşmə hərəkəti */
+}
+
+/* ==========================================
+   Footer Responsivlik (Media Queries)
+   ========================================== */
+
+@media (max-width: 1024px) {
+    /* Planşet tipli ekranlarda linkləri 2 sütunlu gridə yığırıq */
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 50px 30px;
+    }
+    
+    .footer-brand {
+        grid-column: span 2; /* Şirkət detalı üst hissəni tam tutur */
+        padding-right: 0;
+        max-width: 100%;
+    }
+    
+    .footer-brand p {
+        max-width: 450px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Kiçik mobil telefonlarda hər şey tək sətirə sıralanır */
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+    
+    .footer-brand {
+        grid-column: span 1;
+    }
+    
+    .footer-links-column h3 {
+        margin-bottom: 14px;
+    }
+}
+
+/* ==========================================
+   13. Preloader (Yüklənmə Ekranı)
+   ========================================== */
+
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffff; /* Səhifə açılana qədər təmiz ağ fon */
+    z-index: 99999; /* Saytdakı hər bir elementin mütləq üstündə durması üçün */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease; /* İncə itmə effekti */
+}
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Fırlanan Bənövşəyi Dairə */
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid #eceef2; /* İncə boz altlıq dairəsi */
+    border-top: 3px solid #4c3aff; /* Səhifənin əsas bənövşəyi rəngi */
+    border-radius: 50%;
+    animation: spin 1s linear infinite; /* Sonsuz fırlanma animasiyası */
+}
+
+/* Loqo Mətni */
+.loader-logo {
+    font-size: 20px;
+    font-weight: 800;
+    color: #161c2d;
+    letter-spacing: -0.5px;
+}
+
+/* Fırlanma Animasiyasının Qaydası (Keyframes) */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Səhifə yükləndikdə JS vasitəsilə əlavə olunacaq sinif (Kodu gizlədir) */
+#preloader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}

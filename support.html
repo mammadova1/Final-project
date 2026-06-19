@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support & Terms - Brainwave.io</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ==========================================================================
+   Support & Terms Page Stylesheet
+   ========================================================================== */
+
+/* 1. Ümumi Dəyişənlər (Əsas üslub qaydaları ilə uyğunluq üçün) */
+:root {
+    --primary-color: #161c2d;   /* Figma-dakı tünd göy/qara rəng */
+    --accent-color: #4c3aff;    /* Parlaq bənövşəyi */
+    --text-muted: #696b70;      /* Yumşaq boz mətn rəngi */
+}
+
+/* 2. Səhifənin Ümumi Layout-u */
+.support-page {
+    padding-top: 140px;         /* Header-in (navbar) altında boğulmaması üçün yuxarı məsafə */
+    padding-bottom: 120px;
+    background-color: #ffffff;  /* Tam ağ fon */
+}
+
+/* 3. Mərkəzi Başlıq Sahəsi */
+.support-header {
+    text-align: center;
+    max-width: 680px;           /* Başlığın sətirlərinin estetik bölünməsi üçün */
+    margin: 0 auto 80px auto;   /* Altdakı əsas mətn bloku ilə məsafə */
+}
+
+.support-header h1 {
+    font-size: clamp(38px, 5.2vw, 48px); /* Ekran ölçüsünə görə responsiv böyüyən şrift */
+    font-weight: 800;
+    color: var(--primary-color);
+    letter-spacing: -1.5px;
+    margin-bottom: 24px;
+}
+
+.support-header .subtitle {
+    font-size: 18px;
+    line-height: 1.65;
+    color: var(--text-muted);
+}
+
+/* 4. Əsas Mətn Gövdəsi */
+.support-body {
+    max-width: 750px;           /* Oxunma rahatlığını (readability) qorumaq üçün ideal sətir eni */
+    margin: 0 auto;             /* Səhifənin ortasında bərabər durması üçün */
+}
+
+/* Giriş Paraqrafı */
+.lead-text {
+    font-size: 16px;
+    line-height: 1.8;           /* Geniş və rahat oxunan sətirarası məsafə */
+    color: var(--text-muted);
+    margin-bottom: 45px;
+}
+
+/* 5. Alt Bölmələr (License, Security) */
+.support-section-block {
+    margin-bottom: 50px;
+}
+
+.support-section-block h2 {
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 18px;
+    letter-spacing: -0.5px;
+}
+
+.support-section-block p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--text-muted);
+}
+
+/* 6. Siyahı Strukturu (Security altındakı bəndlər) */
+.support-list {
+    list-style: none;           /* Brauzerin standart eybəcər dairələrini sıfırlayırıq */
+    display: flex;
+    flex-direction: column;
+    gap: 16px;                  /* Maddələr arasındakı şaquli boşluq */
+}
+
+.support-list li {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-muted);
+    position: relative;
+    padding-left: 28px;         /* Sol tərəfdə nöqtə üçün xüsusi boşluq yaradırıq */
+}
+
+/* Figma-dakı kiçik minimalist qara dairələrin CSS pseudo-element ilə qurulması */
+.support-list li::before {
+    content: "";
+    position: absolute;
+    left: 8px;
+    top: 10px;                  /* İlk sətirin mətni ilə eyni mərkəzi bərabərlikdə */
+    width: 6px;
+    height: 6px;
+    background-color: var(--primary-color); /* Loqo rəngində estetik kiçik nöqtə */
+    border-radius: 50%;
+}
+
+/* ==========================================================================
+   7. Support Page Responsivlik (Mobil Adaptasiya)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .support-page {
+        padding-top: 100px;
+        padding-bottom: 80px;
+    }
+
+    .support-header {
+        margin-bottom: 50px;
+    }
+
+    /* Mobildə gözün yorulmaması üçün font və sətir sıxlıq tənzimləmələri */
+    .lead-text, 
+    .support-section-block p, 
+    .support-list li {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+}
+
+/* ==========================================
+   13. Preloader (Yüklənmə Ekranı)
+   ========================================== */
+
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffff; /* Səhifə açılana qədər təmiz ağ fon */
+    z-index: 99999; /* Saytdakı hər bir elementin mütləq üstündə durması üçün */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease; /* İncə itmə effekti */
+}
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Fırlanan Bənövşəyi Dairə */
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid #eceef2; /* İncə boz altlıq dairəsi */
+    border-top: 3px solid #4c3aff; /* Səhifənin əsas bənövşəyi rəngi */
+    border-radius: 50%;
+    animation: spin 1s linear infinite; /* Sonsuz fırlanma animasiyası */
+}
+
+/* Loqo Mətni */
+.loader-logo {
+    font-size: 20px;
+    font-weight: 800;
+    color: #161c2d;
+    letter-spacing: -0.5px;
+}
+
+/* Fırlanma Animasiyasının Qaydası (Keyframes) */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Səhifə yükləndikdə JS vasitəsilə əlavə olunacaq sinif (Kodu gizlədir) */
+#preloader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+    </style>
+</head>
+<body>
+    <div id="preloader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <div class="loader-logo">Brainwave.io</div>
+        </div>
+    </div>
+    <header class="site-header container">
+        <div class="nav-left">
+            <div class="logo">Brainwave.io</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#">About us</a></li>
+                <li><a href="#" class="active">Support</a></li>
+            </ul>
+        </div>
+        <div class="nav-auth">
+            <a href="#" class="login-btn">Login</a>
+            <a href="#" class="signup-btn">Sign up</a>
+        </div>
+    </header>
+
+    <main class="support-page container">
+        
+        <div class="support-header">
+            <h1>Support</h1>
+            <p class="subtitle">By accessing and placing an order with UXTheme, you confirm that you are in agreement with and bound by the terms and conditions</p>
+        </div>
+
+        <div class="support-body">
+            
+            <p class="lead-text">
+                By accessing and placing an order with UXTheme, you confirm that you are in agreement with and bound by the terms and conditions contained in the Terms Of Use outlined below. These terms apply to the entire website and any email or other type of communication between you and UXTheme. Under no circumstances shall UXTheme team be liable for any direct, indirect, special, incidental or consequential damages, including, but not limited to, loss of data or profit, arising out of the use, or the inability to use, the materials on this site, even if UXTheme team or an authorized representative has been advised of the possibility of such damages. If your use of materials from this site results in the need for servicing, repair or correction of equipment or data, you assume any costs thereof. UXTheme will not be responsible for any outcome that may occur during the course of usage of our resources.
+            </p>
+
+            <section class="support-section-block">
+                <h2>License</h2>
+                <p>
+                    By purchasing or downloading resource ("item" or "file") you are being granted a license to use these files for specific uses under certain conditions. Ownership remains with UXTheme, and you are required to abide by the following licensing terms.
+                </p>
+            </section>
+
+            <section class="support-section-block">
+                <h2>Security</h2>
+                <ul class="support-list">
+                    <li>You have rights for royalty free use of our resources for any or all of your personal.</li>
+                    <li>You are not required to attribute or link to UXTheme in any of projects.</li>
+                    <li>We reserve the rights to change prices and revise the resources usage policy in any moment.</li>
+                </ul>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            
+            <div class="footer-brand">
+                <div class="footer-logo">Brainwave.io</div>
+                <p>With lots of unique blocks, you can easily build a page without coding. Build your next landing page.</p>
+                
+                <div class="social-links">
+                    <a href="#" class="social-icon">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12.315 2c2.43 0 2.784.01 3.71.054 1.939.089 2.715.867 2.804 2.804.044.926.054 1.281.054 3.71s-.01 2.784-.054 3.71c-.089 1.938-.866 2.714-2.804 2.804-.926.044-1.281.054-3.71.054s-2.784-.01-3.71-.054c-1.939-.089-2.715-.866-2.804-2.804C2.01 14.752 2 14.397 2 11.97s.01-2.784.054-3.71c.089-1.939.866-2.715 2.804-2.804C5.754 2.01 6.109 2 8.535 2c2.43 0 2.784.01 3.71.054zm-.315 1.8c-2.388 0-2.671.009-3.613.053-.1.004-.3.022-.52.062a3.633 3.633 0 0 0-1.298.484 2.458 2.458 0 0 0-.917.917c-.208.354-.367.753-.442 1.299-.044.942-.054 1.224-.054 3.612s.01 2.67.054 3.613c.041.53.111.83.2.984.18.324.425.568.749.749.155.09.454.16.985.2.942.044 1.224.054 3.612.054s2.67-.01 3.613-.054c.53-.042.83-.112.984-.2.324-.18.568-.425.749-.749.09-.155.16-.454.2-.985.044-.942.054-1.224.054-3.612s-.01-2.67-.054-3.613c-.042-.53-.112-.83-.2-.984a2.456 2.456 0 0 0-.749-.749c-.155-.09-.454-.16-.985-.2-.943-.044-1.224-.054-3.613-.054zm0 3.15a5.025 5.025 0 1 1 0 10.05 5.025 5.025 0 0 1 0-10.05zm0 1.8a3.225 3.225 0 1 0 0 6.45 3.225 3.225 0 0 0 0-6.45zm5.11-.9a1.17 1.17 0 1 1-2.34 0 1.17 1.17 0 0 1 2.34 0z"/></path></svg>
+                    </a>
+                    <a href="#" class="social-icon">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M22.23 0H1.77C.8 0 0 .77 0 1.72v20.56C0 23.23.8 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.2 0 22.23 0zM7.12 20.45H3.56V9H7.12v11.45zM5.34 7.43c-1.14 0-2.06-.92-2.06-2.06 0-1.14.92-2.06 2.06-2.06 1.14 0 2.06.92 2.06 2.06 0 1.14-.92 2.06-2.06 2.06zm15.11 13.02h-3.56v-5.6c0-1.34-.03-3.05-1.86-3.05-1.86 0-2.14 1.45-2.14 2.95v5.7H9.31V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29z"/></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-links-column">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">About us</a></li>
+                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links-column">
+                <h3>Product</h3>
+                <ul>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">News</a></li>
+                    <li><a href="#">Help desk</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links-column">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="#">Digital Marketing</a></li>
+                    <li><a href="#">Content Writing</a></li>
+                    <li><a href="#">SEO for Business</a></li>
+                    <li><a href="#">UI Design</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links-column">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Return Policy</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </footer>
+   <script>
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            // Səhifə tam yükləndikdə 'fade-out' klassını əlavə edirik
+            preloader.classList.add('fade-out');
+            
+            // Animasiya bitdikdən sonra elementi DOM-dan tamamilə gizlətmək üçün (isteğe bağlı)
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+        });
+    </script>
+</body>
+</html>
